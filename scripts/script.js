@@ -21,7 +21,7 @@ for (let i = 0; i < gameButtons.length; i++) {
 }
 
 function winnerShow() {
-  const winSound = new Audio("./winSound.mp3");
+  const winSound = new Audio("resources/sound/winSound.mp3");
 
   if (gameButtonsMatrix[0][0].innerText == symbolTimeControl && gameButtonsMatrix[0][1].innerText == symbolTimeControl && gameButtonsMatrix[0][2].innerText == symbolTimeControl) {
     gameButtonsMatrix[0][0].style.backgroundColor = "lime";
