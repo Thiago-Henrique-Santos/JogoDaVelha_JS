@@ -1,5 +1,6 @@
 const gameButtons = document.querySelectorAll(".column");
 const gameButtonsMatrix = [document.querySelectorAll(".line1 .column"), document.querySelectorAll(".line2 .column"), document.querySelectorAll(".line3 .column")];
+const playAgain = document.querySelector("button.playAgain");
 let symbolTimeControl = "x";
 
 for (let i = 0; i < gameButtons.length; i++) {
@@ -19,6 +20,15 @@ for (let i = 0; i < gameButtons.length; i++) {
     }
   });
 }
+
+playAgain.addEventListener("click", () => {
+  for (let i = 0; i < gameButtons.length; i++) {
+    let button = gameButtons[i];
+    button.textContent = "";
+    button.style.backgroundColor = "white";
+    symbolTimeControl = "x";
+  }
+});
 
 function winnerShow() {
   const winSound = new Audio("resources/sounds/winSound.mp3");
