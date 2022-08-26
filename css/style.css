@@ -47,8 +47,12 @@
   border-left: 1px solid black;
 }
 
+.buttonsBox {
+  flex-flow: row wrap;
+}
+
 button.playAgain {
-  width: 150px;
+  width: 125px;
   height: 50px;
   background-color: rgb(26, 80, 243);
   border-color: blue;
@@ -58,10 +62,21 @@ button.playAgain {
   font-weight: bold;
 }
 
-button.playAgain:hover {
+button.startBot {
+  width: 125px;
+  height: 50px;
+  background-color: rgb(253, 140, 33);
+  border-color: rgb(255, 81, 0);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.buttonsBox button:hover {
   cursor: pointer;
 }
 
-button.playAgain:active {
+.buttonsBox button:active {
   transform: scale(0.9);
 }
