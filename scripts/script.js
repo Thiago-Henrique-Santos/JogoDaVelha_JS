@@ -23,7 +23,7 @@ for (let i = 0; i < gameButtons.length; i++) {
         winnerShow(symbolTimeControl, gameButtonsMatrix);
         symbolTimeControl = symbolTimeControl == "x" ? "o" : "x";
 
-        if (botOn && thereIsPositionAvaible()) {
+        if (botOn && thereIsPositionAvaible() && !gameOver) {
           let position = easyComp(gameButtons);
           position = gameButtons[position];
           position.style.color = "RoyalBlue";
