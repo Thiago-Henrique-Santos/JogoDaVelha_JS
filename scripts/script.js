@@ -6,24 +6,35 @@ const playAgain = document.querySelector("button.playAgain");
 const startBot = document.querySelector("button.startBot");
 let symbolTimeControl = "x";
 let gameOver = false;
-let playerTime = true;
+let botOn = false;
 
 for (let i = 0; i < gameButtons.length; i++) {
   let button = gameButtons[i];
   button.addEventListener("click", () => {
-    if (!button.innerText) {
-      if (symbolTimeControl == "x") {
-        button.style.color = "orange";
-        button.textContent = "x";
-      } else {
-        button.style.color = "RoyalBlue";
-        button.textContent = "o";
-      }
+    if (!gameOver) {
+      if (!button.innerText) {
+        if (symbolTimeControl == "x") {
+          button.style.color = "orange";
+          button.textContent = "x";
+        } else {
+          button.style.color = "RoyalBlue";
+          button.textContent = "o";
+        }
+        winnerShow(symbolTimeControl, gameButtonsMatrix);
+        symbolTimeControl = symbolTimeControl == "x" ? "o" : "x";
 
-      winnerShow(symbolTimeControl, gameButtonsMatrix);
-      symbolTimeControl = symbolTimeControl == "x" ? "o" : "x";
-      playerTime = false;
+        if (botOn && thereIsPositionAvaible()) {
+          let position = easyComp(gameButtons);
+          position = gameButtons[position];
+          position.style.color = "RoyalBlue";
+          position.textContent = "o";
+
+          winnerShow(symbolTimeControl, gameButtonsMatrix);
+          symbolTimeControl = "x";
+        }
+      }
     }
+
   });
 }
 
@@ -33,11 +44,13 @@ playAgain.addEventListener("click", () => {
     button.textContent = "";
     button.style.backgroundColor = "white";
     symbolTimeControl = "x";
+    botOn = false;
+    gameOver = false;
   }
 });
 
 startBot.addEventListener("click", () => {
-  //Start bot
+  botOn = true;
 });
 
 function winnerShow() {
@@ -106,4 +119,14 @@ function winnerShow() {
     winSound.play();
     gameOver = true;
   }
+}
+
+function thereIsPositionAvaible() {
+  for (let i = 0; i < gameButtons.length; i++) {
+    let button = gameButtons[i];
+    if (!button.textContent) {
+      return true;
+    }
+  }
+  return false;
 }
