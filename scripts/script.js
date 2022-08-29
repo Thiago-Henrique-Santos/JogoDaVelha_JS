@@ -7,11 +7,12 @@ const startBot = document.querySelector("button.startBot");
 let symbolTimeControl = "x";
 let gameOver = false;
 let botOn = false;
+let botPlaying = false;
 
 for (let i = 0; i < gameButtons.length; i++) {
   let button = gameButtons[i];
   button.addEventListener("click", () => {
-    if (!gameOver) {
+    if (!gameOver && !botPlaying) {
       if (!button.innerText) {
         if (symbolTimeControl == "x") {
           button.style.color = "orange";
@@ -24,13 +25,18 @@ for (let i = 0; i < gameButtons.length; i++) {
         symbolTimeControl = symbolTimeControl == "x" ? "o" : "x";
 
         if (botOn && thereIsPositionAvaible() && !gameOver) {
-          let position = easyComp(gameButtons);
-          position = gameButtons[position];
-          position.style.color = "RoyalBlue";
-          position.textContent = "o";
+          botPlaying = true;
 
-          winnerShow(symbolTimeControl, gameButtonsMatrix);
-          symbolTimeControl = "x";
+          setTimeout(() => {
+            let position = easyComp(gameButtons);
+            position = gameButtons[position];
+            position.style.color = "RoyalBlue";
+            position.textContent = "o";
+
+            winnerShow(symbolTimeControl, gameButtonsMatrix);
+            symbolTimeControl = "x";
+            botPlaying = false;
+          }, 400);
         }
       }
     }
